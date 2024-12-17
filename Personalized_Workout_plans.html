@@ -4,10 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personalized Workout Plans</title>
-    <link rel="stylesheet" href="style.css">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation Bar Styling */
+        .navbar {
+            background-color: #333;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            color: #fff;
+            font-size: 1.8rem;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #f00;
+        }
+
+        .join-btn {
+            background-color: #f00;
+            padding: 10px 20px;
+            color: #fff;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 200px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+
+        /* Show dropdown on hover, focus, or click */
+        .dropdown:hover .dropdown-content,
+        .dropdown:focus-within .dropdown-content,
+        .dropdown.show .dropdown-content {
+            display: block;
+        }
+
+        /* Style the button when focused or hovered */
+        .dropbtn {
+            color: #fff;
+            padding: 14px 16px;
+            font-size: 16px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            color: #f00;
+        }
+
+        /* Workout Plans Section */
+        .workout-plans {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .workout-plans h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .workout-plans p {
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+        .workout-plans form {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        form select, form input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 1rem;
+        }
+
+        form button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #f00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        form button:hover {
+            background-color: #c00;
+        }
+
+        form button:active {
+            transform: scale(0.95);
+        }
+
+        #workoutPlan {
+            margin-top: 20px;
+        }
+
+        #workoutPlan ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #workoutPlan ul li {
+            background-color: #333;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -38,25 +214,25 @@
 
         <!-- Form for User Input -->
         <form id="workoutForm">
-            <label for="fitnessLevel">Select your fitness level:</label><br>
+            <label for="fitnessLevel">Select your fitness level:</label>
             <select id="fitnessLevel" required>
                 <option value="beginner">Beginner</option>
                 <option value="intermediate">Intermediate</option>
                 <option value="advanced">Advanced</option>
-            </select><br>
+            </select>
 
-            <label for="goal">What is your primary goal?</label><br>
+            <label for="goal">What is your primary goal?</label>
             <select id="goal" required>
                 <option value="muscleGain">Muscle Gain</option>
                 <option value="weightLoss">Weight Loss</option>
                 <option value="endurance">Endurance</option>
                 <option value="generalFitness">General Fitness</option>
-            </select><br>
+            </select>
 
-            <label for="progress">How many days a week can you train?</label><br>
-            <input type="number" id="progress" required min="1" max="7" /><br>
+            <label for="progress">How many days a week can you train?</label>
+            <input type="number" id="progress" required min="1" max="7" />
 
-            <button type="submit">Generate Plan</button><br>
+            <button type="submit">Generate Plan</button>
         </form>
 
         <!-- Display Personalized Plan -->
@@ -98,28 +274,20 @@
             const progress = document.getElementById("progress").value;
 
             // Validate input
-            if (!fitnessLevel || !goal || !progress) {
-                alert("Please fill in all fields.");
+            if (!fitnessLevel || !goal || !progress || progress < 1 || progress > 7) {
+                alert("Please fill out all fields correctly.");
                 return;
             }
 
-            // Get the corresponding workout plan based on user input
-            const selectedPlan = workoutPlans[fitnessLevel][goal];
-            const daysAvailable = parseInt(progress);
+            const plan = workoutPlans[fitnessLevel][goal] || [];
+            const filteredPlan = plan.slice(0, progress);
 
-            // Filter the plan based on the user's available training days
-            const filteredPlan = selectedPlan.filter(plan => {
-                const daysRequired = parseInt(plan.match(/\d+/)[0]);
-                return daysRequired <= daysAvailable;
-            });
-
-            // Display the personalized plan
             const planList = document.getElementById("planList");
-            planList.innerHTML = ""; // Clear previous plan
-            filteredPlan.forEach(plan => {
-                const listItem = document.createElement("li");
-                listItem.textContent = plan;
-                planList.appendChild(listItem);
+            planList.innerHTML = "";
+            filteredPlan.forEach(workout => {
+                const li = document.createElement("li");
+                li.textContent = workout;
+                planList.appendChild(li);
             });
 
             document.getElementById("workoutPlan").style.display = "block";
