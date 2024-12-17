@@ -96,7 +96,7 @@ margin: 30px;
 .gap{
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
     justify-content: center;
 }
 
