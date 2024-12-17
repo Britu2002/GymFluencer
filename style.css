@@ -115,3 +115,56 @@ body {
 .dropbtn:hover, .dropbtn:focus {
   color: #f00;
 }
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  .navbar ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+ 
+  .feature-card{
+    margin: 20px;
+  }
+  .mockup {
+    grid-column: auto;
+    order: -1; /* Move the mockup to the top */
+  }
+  .mockup img {
+    max-width: 90%;
+  }
+  .feature-card {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar h1 {
+    font-size: 1.2rem;
+  }
+  .navbar ul li a {
+    font-size: 0.9rem;
+  }
+  .join-btn {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+  .feature-card h2 {
+    font-size: 1rem;
+  }
+  .feature-card p {
+    font-size: 0.8rem;
+  }
+}
