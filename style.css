@@ -1,41 +1,29 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: white;
-    margin: 0;
-    padding: 0;
-  }
-  
-  div {
-    margin: 20px;
-    padding: 20px;
-    background: #222;
-    border-radius: 10px;
-  }
-  
-  button {
-    background-color: red;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  input,
-  select {
-    padding: 10px;
-    margin: 10px;
-    width: 90%;
-    border-radius: 5px;
-  }
-  /* Navigation Bar Styling */
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar Styling */
 .navbar {
   background-color: #333;
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar h1 {
@@ -63,6 +51,7 @@ body {
 .navbar ul li a:hover {
   color: #f00;
 }
+
 .join-btn {
   background-color: #f00;
   padding: 10px 20px;
@@ -71,6 +60,7 @@ body {
   text-decoration: none;
   font-weight: bold;
 }
+
 /* Dropdown Menu */
 .dropdown {
   position: relative;
@@ -116,10 +106,58 @@ body {
   color: #f00;
 }
 
-/* Responsive Design */
+/* Form Section */
+form {
+  margin: 50px 0 20px;
+  background-color: #222;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: auto;
+}
+
+label {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  display: block;
+  text-align: left;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background: #333;
+  color: white;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff3333;
+}
+.workout-plans{
+  text-align: center;
+  margin-top: 130px;
+}
+
+/* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
-  .container {
-    grid-template-columns: 1fr 1fr;
+  .navbar ul {
+    gap: 15px;
   }
 }
 
@@ -133,20 +171,22 @@ body {
     flex-direction: column;
     gap: 10px;
   }
- 
-  .feature-card{
-    margin: 20px;
+  .navbar ul li {
+    display: block;
   }
-  .mockup {
-    grid-column: auto;
-    order: -1; /* Move the mockup to the top */
+  .navbar h1 {
+    font-size: 1.5rem;
   }
-  .mockup img {
-    max-width: 90%;
+  .join-btn {
+    font-size: 0.9rem;
+    padding: 8px 15px;
   }
-  .feature-card {
+  form {
+    padding: 20px;
     width: 90%;
-    height: auto;
+  }
+  button {
+    padding: 12px;
   }
 }
 
