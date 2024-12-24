@@ -185,6 +185,9 @@ footer {
     width: 90%;
     height: auto;
   }
+  .container{
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 480px) {
@@ -203,6 +206,9 @@ footer {
   }
   .feature-card p {
     font-size: 0.8rem;
+  }
+  .container{
+    flex-wrap: wrap;
   }
 }
 
